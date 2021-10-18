@@ -20,7 +20,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="@{viewModel.response}" />
+        android:text="@{viewModel.post.title}" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
