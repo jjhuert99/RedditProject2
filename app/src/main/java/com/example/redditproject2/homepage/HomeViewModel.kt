@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.example.redditproject2.network.RedditApi
 import com.example.redditproject2.network.RedditPost
 import com.example.redditproject2.network.Children
+import com.example.redditproject2.network.DataNested
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -20,6 +21,10 @@ class HomeViewModel : ViewModel() {
     private val _response = MutableLiveData<String>()
     val response: LiveData<String>
         get() = _response
+
+    private val _post = MutableLiveData<DataNested>()
+    val post: LiveData<DataNested>
+        get() = _post
 
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main )
@@ -46,7 +51,7 @@ class HomeViewModel : ViewModel() {
             var getPostsDeferred = RedditApi.retrofitService.getPosts()
             try {
                 var result = getPostsDeferred.await()
-                _response.value = "Success: ${result.data.children.size} Reddit Posts"
+                _post.value = result.data.children[0].data
             } catch (e: Exception) {
                 _response.value = "Failure: ${e.message}"
             }
