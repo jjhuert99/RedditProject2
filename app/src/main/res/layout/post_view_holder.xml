@@ -7,7 +7,7 @@
     <data>
         <variable
             name="post"
-            type="com.example.redditproject2.network.DataNested" />
+            type="com.example.redditproject2.network.Children" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginBottom="8dp"
-            android:text="@{post.title}"
+            android:text="@{post.data.title}"
             android:textSize="18sp"
             android:textColor="#4166f5"
             app:layout_constraintBottom_toTopOf="@+id/browserLink"
@@ -35,7 +35,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
-            android:text="@{post.author_fullname}"
+            android:text="@{post.data.author_fullname}"
             android:textSize="12sp"
             android:textColor="#8b4513"
             app:layout_constraintBottom_toTopOf="@+id/postTitleText"
