@@ -7,6 +7,10 @@ import androidx.lifecycle.ViewModel
 import com.example.redditproject2.network.RedditApi
 import com.example.redditproject2.network.RedditPost
 import com.example.redditproject2.network.Children
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 import retrofit2.Call
 import retrofit2.Callback
@@ -17,21 +21,40 @@ class HomeViewModel : ViewModel() {
     val response: LiveData<String>
         get() = _response
 
+    private var viewModelJob = Job()
+    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main )
     init {
         getRedditPosts()
     }
 
     private fun getRedditPosts() {
-        RedditApi.retrofitService.getPosts().enqueue(object: Callback<RedditPost> {
-            override fun onFailure(call: Call<RedditPost>, t: Throwable) {
-                _response.value = "Failure: " + t.message
-            }
+        //RedditApi.retrofitService.getPosts().enqueue(object: Callback<RedditPost> {
+            /*coroutineScope.launch {
+                var getPostsDeferred = RedditApi.retrofitService.getPosts()
+                var result = getPostsDeferred.await()
+                override fun onResponse(call: Call<RedditPost>, response: Response<RedditPost>) {
+                    _response.value =
+                        "Success ${response.body()?.data!!.children.size} Reddit Posts"
+                }
 
-            override fun onResponse(call: Call<RedditPost>, response: Response<RedditPost>) {
-                _response.value = "Success ${response.body()} Reddit Posts"
-                Log.d("JJJ", "${response.body()?.data!!.children.size}")
+                override fun onFailure(call: Call<RedditPost>, t: Throwable) {
+                    _response.value = "Failure: " + t.message
+                }
+            )
+        }*/
+        coroutineScope.launch {
+            var getPostsDeferred = RedditApi.retrofitService.getPosts()
+            try {
+                var result = getPostsDeferred.await()
+                _response.value = "Success: ${result.data.children.size} Reddit Posts"
+            } catch (e: Exception) {
+                _response.value = "Failure: ${e.message}"
             }
-        })
-        //_response.value = "set mars api here"
+        }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
     }
 }
