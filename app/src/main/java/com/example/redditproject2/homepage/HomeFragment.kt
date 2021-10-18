@@ -22,6 +22,7 @@ class HomeFragment : Fragment() {
 
         binding.setLifecycleOwner(this)
         binding.viewModel = viewModel
+        binding.postPosts.adapter = RedditPostAdapter()
         return binding.root
         //return inflater.inflate(R.layout.home_fragment, container, false)
     }

@@ -22,8 +22,8 @@ class HomeViewModel : ViewModel() {
     val response: LiveData<String>
         get() = _response
 
-    private val _post = MutableLiveData<DataNested>()
-    val post: LiveData<DataNested>
+    private val _post = MutableLiveData<List<Children>>()
+    val post: LiveData<List<Children>>
         get() = _post
 
     private var viewModelJob = Job()
@@ -51,7 +51,7 @@ class HomeViewModel : ViewModel() {
             var getPostsDeferred = RedditApi.retrofitService.getPosts()
             try {
                 var result = getPostsDeferred.await()
-                _post.value = result.data.children[0].data
+                _post.value = result.data.children
             } catch (e: Exception) {
                 _response.value = "Failure: ${e.message}"
             }
