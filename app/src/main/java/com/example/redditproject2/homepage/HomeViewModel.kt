@@ -33,20 +33,6 @@ class HomeViewModel : ViewModel() {
     }
 
     private fun getRedditPosts() {
-        //RedditApi.retrofitService.getPosts().enqueue(object: Callback<RedditPost> {
-            /*coroutineScope.launch {
-                var getPostsDeferred = RedditApi.retrofitService.getPosts()
-                var result = getPostsDeferred.await()
-                override fun onResponse(call: Call<RedditPost>, response: Response<RedditPost>) {
-                    _response.value =
-                        "Success ${response.body()?.data!!.children.size} Reddit Posts"
-                }
-
-                override fun onFailure(call: Call<RedditPost>, t: Throwable) {
-                    _response.value = "Failure: " + t.message
-                }
-            )
-        }*/
         coroutineScope.launch {
             var getPostsDeferred = RedditApi.retrofitService.getPosts()
             try {
