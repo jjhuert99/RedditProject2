@@ -15,12 +15,25 @@
     android:background="@drawable/red_orange"
     tools:context="com.example.redditproject2.MainActivity">
 
+    <TextView
+        android:id="@+id/redditTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="#07000000"
+        android:paddingBottom="8dp"
+        android:paddingTop="40dp"
+        android:text="Reddit"
+        android:textSize="28dp"
+        android:textColor="@color/white"
+        android:textAlignment="center" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/postPosts"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+        app:spanCount="1"
         app:listPosts="@{viewModel.post}" />
 
 </LinearLayout>
