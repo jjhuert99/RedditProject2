@@ -42,6 +42,6 @@ class RedditPostAdapter(val clickListener:Clicked) : ListAdapter<Children, Reddi
         holder.bind(redditPost, clickListener)
     }
 }
-class Clicked(val clickListener: (postID: String, postSelf: String) -> Unit){
-    fun onClick(post: Children) = clickListener(post.data.id, post.data.selftext)
+class Clicked(val clickListener: (postID: String, postSelf: String, webLink: String, webFalse: Boolean) -> Unit){
+    fun onClick(post: Children, webFalse: Boolean) = clickListener(post.data.id, post.data.selftext, post.data.permalink, webFalse)
 }
