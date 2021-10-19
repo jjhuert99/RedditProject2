@@ -8,62 +8,106 @@
         <variable
             name="post"
             type="com.example.redditproject2.network.Children" />
+
+        <variable
+            name="click"
+            type="com.example.redditproject2.homepage.Clicked" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#e5e4e2">
-
-        <TextView
-            android:id="@+id/postTitleText"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginBottom="8dp"
-            android:text="@{post.data.title}"
-            android:textSize="18sp"
-            android:textColor="#4166f5"
-            app:layout_constraintBottom_toTopOf="@+id/browserLink"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/authorText" />
+            android:layout_marginEnd="0dp"
+            android:background="#EFEEEC"
+            android:onClick="@{() -> click.onClick(post)}"
+            >
 
-        <TextView
-            android:id="@+id/authorText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:text="@{post.data.author_fullname}"
-            android:textSize="12sp"
-            android:textColor="#8b4513"
-            app:layout_constraintBottom_toTopOf="@+id/postTitleText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/postTitleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginBottom="8dp"
+                android:text="@{post.data.title}"
+                android:textColor="#4166f5"
+                android:textSize="14sp"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toTopOf="@+id/browserLink"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/authorText" />
 
-        <TextView
-            android:id="@+id/browserLink"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginBottom="16dp"
-            android:text="View In Broswer"
-            android:textSize="12sp"
-            android:textColor="#4166f5"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/postTitleText" />
+            <TextView
+                android:id="@+id/authorText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="Author: "
+                android:textColor="#8b4513"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@+id/postTitleText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/commentsText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:text="Comments"
-            android:textSize="12sp"
-            android:textColor="#4166f5"
-            app:layout_constraintBaseline_toBaselineOf="@+id/browserLink"
-            app:layout_constraintEnd_toEndOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/browserLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginBottom="16dp"
+                android:text="View In Broswer"
+                android:textColor="#4166f5"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/postTitleText" />
+
+            <TextView
+                android:id="@+id/commentsText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:text="@{Integer.toString(post.data.num_comments)}"
+                android:textColor="#4166f5"
+                android:textSize="12sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/browserLink"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="1000" />
+
+            <TextView
+                android:id="@+id/commentsTheWord"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Comments: "
+                android:textColor="#4166f5"
+                android:textSize="12sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/browserLink"
+                app:layout_constraintEnd_toStartOf="@+id/commentsText"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/browserLink" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{post.data.author_fullname}"
+                android:textColor="#8b4513"
+                android:textSize="12sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/authorText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/authorText" />
+
+            <ImageView
+                android:id="@+id/worldImage"
+                android:layout_width="12sp"
+                android:layout_height="12sp"
+                android:layout_marginStart="1dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/browserLink"
+                app:srcCompat="@drawable/ic_baseline_language_24" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

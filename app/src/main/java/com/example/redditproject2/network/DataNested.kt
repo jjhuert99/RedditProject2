@@ -5,6 +5,6 @@ class DataNested(
     val selftext: String,
     val title: String,
     val author_fullname: String,
-    val num_comments: Double
+    val num_comments: Int
 ) {
 }
