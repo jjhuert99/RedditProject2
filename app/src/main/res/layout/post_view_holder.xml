@@ -13,12 +13,16 @@
             name="click"
             type="com.example.redditproject2.homepage.Clicked" />
     </data>
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="0dp"
             android:background="#EFEEEC"
+
             android:onClick="@{() -> click.onClick(post, true)}"
             >
 
@@ -92,7 +96,7 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{post.data.author_fullname}"
+                android:text="@{post.data.author}"
                 android:textColor="#8b4513"
                 android:textSize="12sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/authorText"
@@ -111,4 +115,9 @@
                 app:srcCompat="@drawable/ic_baseline_language_24" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.legacy.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="14dp" />
+</LinearLayout>
 </layout>
