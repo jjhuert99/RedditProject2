@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Reddit</string>
+    <string name="reddit_title">Reddit</string>
+    <string name="author_pre">Author:</string>
+    <string name="view_in_broswer">View In Broswer</string>
+    <string name="comments_pre">Comments:</string>
 </resources>

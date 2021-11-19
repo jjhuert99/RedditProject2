@@ -1,51 +1,57 @@
 package com.example.redditproject2.homepage
 
-import android.util.Log
+import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.redditproject2.network.RedditApi
-import com.example.redditproject2.network.RedditPost
+import androidx.lifecycle.viewModelScope
 import com.example.redditproject2.network.Children
-import com.example.redditproject2.network.DataNested
+import com.example.redditproject2.network.RedditRepo
+import com.example.redditproject2.network.ServiceResult
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+@HiltViewModel
+class HomeViewModel @Inject constructor(
+    private val app: Application,
+    private val RedditRepo: RedditRepo,
+    private val dispatcher: Dispatchers
+): ViewModel() {
+    enum class RedditStatus {ERROR, DONE}
 
-class HomeViewModel : ViewModel() {
     private val _response = MutableLiveData<String>()
     val response: LiveData<String>
         get() = _response
+
+    private val _status = MutableLiveData<RedditStatus>()
+    val status: LiveData<RedditStatus> = _status
 
     private val _post = MutableLiveData<List<Children>>()
     val post: LiveData<List<Children>>
         get() = _post
 
-    private var viewModelJob = Job()
-    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main )
     init {
         getRedditPosts()
     }
 
     private fun getRedditPosts() {
-        coroutineScope.launch {
-            var getPostsDeferred = RedditApi.retrofitService.getPosts()
-            try {
-                var result = getPostsDeferred.await()
-                _post.value = result.data.children
-            } catch (e: Exception) {
-                _response.value = "Failure: ${e.message}"
+        viewModelScope.launch(dispatcher.IO) {
+            when(val response = RedditRepo.getPosts()){
+                is ServiceResult.Succes ->{
+                    _post.postValue(response.data?.data?.children)
+                    _status.postValue(RedditStatus.DONE)
+                }
+                is ServiceResult.Error ->{
+                    _status.postValue(RedditStatus.ERROR)
+                }
+                else ->{
+                    _status.postValue(RedditStatus.ERROR)
+                }
             }
         }
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
     }
 }

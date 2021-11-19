@@ -19,14 +19,10 @@
         android:id="@+id/redditTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="#07000000"
         android:paddingBottom="8dp"
         android:paddingTop="40dp"
-        android:text="Reddit"
-        android:textSize="28dp"
-        android:textColor="@color/white"
-        android:textAlignment="center" />
+        android:text="@string/reddit_title"
+        style="@style/home_reddit_title" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/postPosts"
