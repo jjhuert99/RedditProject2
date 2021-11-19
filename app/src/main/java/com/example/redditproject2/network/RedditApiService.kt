@@ -1,5 +1,7 @@
 package com.example.redditproject2.network
 
+/*
+
 import com.google.gson.Gson
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
@@ -33,4 +35,4 @@ object RedditApi{
     val retrofitService: RedditApiService by lazy{
         retrofit.create(RedditApiService::class.java)
     }
-}
+}*/

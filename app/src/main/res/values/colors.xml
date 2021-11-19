@@ -7,4 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="transparent1">#07000000</color>
+    <color name="post_grey">#EFEEEC</color>
+    <color name="post_info_blue">#4166f5</color>
+    <color name="author_brown">#8b4513</color>
 </resources>

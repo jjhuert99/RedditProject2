@@ -1,5 +1,8 @@
 package com.example.redditproject2.homepage
 
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.UnderlineSpan
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -32,13 +35,13 @@ class RedditPostAdapter(val clickListener:Clicked) : ListAdapter<Children, Reddi
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): RedditPostAdapter.PostViewHolder {
+    ): PostViewHolder {
         return PostViewHolder(PostViewHolderBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
-    override fun onBindViewHolder(holder: RedditPostAdapter.PostViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         val redditPost = getItem(position)
-        holder.bind(getItem(position)!!, clickListener)
+        holder.bind(getItem(position), clickListener)
         holder.bind(redditPost, clickListener)
     }
 }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="home_reddit_title">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:background">@color/transparent1</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="author_info">
+        <item name="android:textColor">@color/author_brown</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="blue_sub_info">
+        <item name="android:textColor">@color/post_info_blue</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="post_title">
+        <item name="android:textColor">@color/post_info_blue</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+</resources>
